@@ -1,0 +1,240 @@
+/* ===========================
+   Global Styles & Reset
+   =========================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Colors */
+  --primary: #fbbf24;
+  --primary-dark: #f59e0b;
+  --background: #1f2937;
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --border: #374151;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 300ms ease-in-out;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--background);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: var(--font-size-base);
+}
+
+/* ===========================
+   Typography
+   =========================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ===========================
+   Utilities & Layout
+   =========================== */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+/* ===========================
+   Star Rating Component
+   =========================== */
+
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--spacing-lg);
+  background-color: var(--background);
+}
+
+.rating-container {
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.rating-container h1 {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* ===========================
+   Stars Wrapper & Individual Star
+   =========================== */
+
+.stars-wrapper {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.star {
+  /* Reset button styles */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 3.5rem;
+  line-height: 1;
+  transition: all var(--transition-fast);
+  appearance: none;
+
+  /* Star styling */
+  color: var(--text-secondary);
+
+  /* Interactions */
+  &:hover {
+    transform: scale(1.2) rotate(10deg);
+    filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.5));
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  /* Filled state */
+  &.filled {
+    color: var(--primary);
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+  }
+
+  /* Focus state for accessibility */
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+}
+
+/* ===========================
+   Rating Text - Conditional Colors
+   =========================== */
+
+.rating-text {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  height: 1.5rem;
+  transition: color var(--transition-normal);
+}
+
+/* Color effects based on rating level */
+.rating-container[data-rating="1"] .rating-text,
+.rating-container[data-rating="2"] .rating-text {
+  color: #ef4444;
+}
+
+.rating-container[data-rating="3"] .rating-text {
+  color: #f97316;
+}
+
+.rating-container[data-rating="4"] .rating-text {
+  color: var(--primary);
+}
+
+.rating-container[data-rating="5"] .rating-text {
+  color: #22c55e;
+}
+
+.rating-container:has(.star.filled) .rating-text {
+  color: var(--primary);
+}
+
+/* ===========================
+   Animations
+   =========================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+
+@media (max-width: 768px) {
+  .app {
+    padding: var(--spacing-md);
+  }
+
+  .rating-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .stars-wrapper {
+    gap: var(--spacing-sm);
+  }
+
+  .star {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rating-container h1 {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .stars-wrapper {
+    gap: var(--spacing-xs);
+  }
+
+  .star {
+    font-size: 2rem;
+  }
+
+  .rating-text {
+    font-size: 1rem;
+  }
+}

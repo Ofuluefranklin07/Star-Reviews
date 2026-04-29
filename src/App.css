@@ -1,0 +1,146 @@
+/* ===========================
+   Star Rating Component
+   =========================== */
+
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--spacing-lg);
+  background-color: var(--background);
+}
+
+.rating-container {
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.rating-container h1 {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* ===========================
+   Stars Wrapper & Individual Star
+   =========================== */
+
+.stars-wrapper {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.star {
+  /* Reset button styles */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 3.5rem;
+  line-height: 1;
+  transition: all var(--transition-fast);
+  appearance: none;
+
+  /* Star styling */
+  color: var(--text-secondary);
+
+  /* Interactions */
+  &:hover {
+    transform: scale(1.2) rotate(10deg);
+    filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.5));
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  /* Filled state */
+  &.filled {
+    color: var(--primary);
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+  }
+
+  /* Focus state for accessibility */
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+}
+
+/* ===========================
+   Rating Text
+   =========================== */
+
+.rating-text {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  height: 1.5rem;
+  transition: color var(--transition-normal);
+}
+
+.rating-container:has(.star.filled) .rating-text {
+  color: var(--primary);
+}
+
+/* ===========================
+   Animations
+   =========================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+
+@media (max-width: 768px) {
+  .app {
+    padding: var(--spacing-md);
+  }
+
+  .rating-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .stars-wrapper {
+    gap: var(--spacing-sm);
+  }
+
+  .star {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rating-container h1 {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .stars-wrapper {
+    gap: var(--spacing-xs);
+  }
+
+  .star {
+    font-size: 2rem;
+  }
+
+  .rating-text {
+    font-size: 1rem;
+  }
+}
+
